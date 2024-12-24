@@ -1,0 +1,89 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f4f4f4;
+}
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-gap: 10px;
+  margin-top: 20px;
+  visibility: hidden; /* Hide the game board initially */
+}
+.tile {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3498db;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transform: rotateY(0);
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+.tile.blank {
+  background-color: #95a5a6;
+  pointer-events: none;
+}
+.hidden {
+  transform: rotateY(180deg);
+  color: transparent;
+}
+#score {
+  font-size: 20px;
+}
+#timer {
+  font-size: 20px;
+  margin-left: 20px;
+}
+#message {
+  font-size: 24px;
+  font-weight: bold;
+  color: #27ae60;
+  margin-top: 20px;
+}
+#score-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+#start-button {
+  font-size: 20px;
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+#start-button:hover {
+  background-color: #2980b9;
+}
+#msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#restart {
+  margin-left: 20px;
+  margin-top: 20px;
+  font-size: 20px;
+  padding: 10px 20px;
+  background-color: #27ae60;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}

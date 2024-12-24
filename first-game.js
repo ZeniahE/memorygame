@@ -1,4 +1,5 @@
 // list of possible words to be matched
+
 const words = [
   "Apple",
   "Banana",
@@ -8,6 +9,10 @@ const words = [
   "Fig",
   "Grape",
   "Honeydew",
+  "Kiwi",
+  "Lemon",
+  "Mango",
+  "Nectarine",
 ];
 // duplicates the list to display both the words and their match
 const tiles = [...words, ...words].sort(() => Math.random() - 0.5);
@@ -70,7 +75,7 @@ function checkMatch() {
 
     // compares the amount of user discovered pairs to the total pairs possible
     if (matchedPairs === words.length) {
-      messageElement.textContent = "Final Score: " + score + "/160 !";
+      messageElement.textContent = "Final Score: " + score + "/240 !";
       restartButton.style.display = "inline-block";
       scoreElement.style.display = "none";
       timerElement.style.display = "none";

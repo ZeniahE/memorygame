@@ -1,21 +1,23 @@
-// list of possible words to be matched
+// list of possible images to be matched
 
-const words = [
-  "Apple",
-  "Banana",
-  "Cherry",
-  "Date",
-  "Elderberry",
-  "Fig",
-  "Grape",
-  "Honeydew",
-  "Kiwi",
-  "Lemon",
-  "Mango",
-  "Nectarine",
+const images = [
+  "images/arson-aliens.webp",
+  "images/blkf-serve.webp",
+  "images/concert.webp",
+  "images/girl-whatchu-said-to-me.webp",
+  "images/luh-bw-moment.webp",
+  "images/mega-arson.webp",
+  "images/megas-disgusted.webp",
+  "images/mega-slay.webp",
+  "images/oh-okay.webp",
+  "images/os-candid-serve.webp",
+  "images/os-crouched.webp",
+  "images/os-moment.webp",
+  "images/in-the-kitchen-face-card.webp",
+  "images/TBB-alt.webp",
+  "images/thermoSTAT.webp",
+  "images/hh-serve.webp",
 ];
-// duplicates the list to display both the words and their match
-const tiles = [...words, ...words].sort(() => Math.random() - 0.5);
 
 // hosts elements from the document in variables so they can be accessed
 const board = document.getElementById("game-board");
@@ -37,7 +39,7 @@ const restartButton = document.getElementById("restart");
 restartButton.style.display = "none"; // Hidden by default
 restartButton.addEventListener("click", () => {
   // Restart logic: reset the game
-  board.innerHTML = ""; // Clear the board
+  board.innerHTML = null; // Clear the board
   firstTile = null;
   secondTile = null;
   score = 0;
@@ -48,7 +50,9 @@ restartButton.addEventListener("click", () => {
   restartButton.style.display = "none"; // Hide the restart button again
   scoreElement.style.display = "inline-block";
   timerElement.style.display = "inline-block";
-  startGame(); // Restart the game
+  setTimeout(() => {
+    startGame(); // Restart the game
+  }, 200);
 });
 
 // Add the restart button to the DOM next to the message element
@@ -65,7 +69,7 @@ function updateScore(amount) {
 
 // checks if the user made a correct match
 function checkMatch() {
-  if (firstTile.textContent === secondTile.textContent) {
+  if (firstTile.dataset.image === secondTile.dataset.image) {
     updateScore(20); // increments score
     firstTile.classList.remove("hidden"); // keeps tile unhidden
     secondTile.classList.remove("hidden"); // keeps tile unhidden
@@ -74,7 +78,7 @@ function checkMatch() {
     matchedPairs++; // keeps track of successful pairs
 
     // compares the amount of user discovered pairs to the total pairs possible
-    if (matchedPairs === words.length) {
+    if (matchedPairs === images.length) {
       messageElement.textContent = "Final Score: " + score + "/240 !";
       restartButton.style.display = "inline-block";
       scoreElement.style.display = "none";
@@ -117,13 +121,20 @@ function handleTileClick(event) {
 
 // fuction responsable for the initialization of the game on button click
 function startGame() {
+  // duplicates the list to display both the words and their match
+  const tiles = [...images, ...images].sort(() => Math.random() - 0.5);
+
   startButton.style.display = "none"; // Hide the start button
   board.style.visibility = "visible"; // Show the game board
+
   // sets the tiles and places them on the board
-  tiles.forEach((word) => {
+  tiles.forEach((image) => {
     const tile = document.createElement("div"); // makes the tiles as div elements
     tile.classList.add("tile"); // adds the tiles to a list
-    tile.textContent = word; // adds the words to each tile
+    tile.dataset.image = image; // Store the image name for matching
+    tile.style.backgroundImage = `url(${image})`; // Set the image as the tile's background
+    tile.style.backgroundSize = "cover"; // Ensure the image fills the tile
+    tile.style.backgroundPosition = "center";
     tile.addEventListener("click", handleTileClick); // calls the handleTileClick function when a till is clicked
     board.appendChild(tile); // adds the tiles to the board
   });
